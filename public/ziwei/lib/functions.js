@@ -42,7 +42,7 @@ $(window).resize(() => {
 }(jQuery));
 
 function timeElapse(date) {
-  const current = Date();
+  const current = new Date();
 
   let seconds = (Date.parse(current) - Date.parse(date)) / 1000;
   const days = Math.floor(seconds / (3600 * 24));
