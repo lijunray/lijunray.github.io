@@ -9,7 +9,7 @@ body {
 }
 body::after {
   content: "";
-  background: url(../../assets/images/background2.jpg);
+  background: url(../../assets/images/desktop/background2.jpg);
   opacity: 0.5;
   top: 0;
   left: 0;
@@ -17,7 +17,13 @@ body::after {
   right: 0;
   position: absolute;
   z-index: -1;
-  background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media screen and (max-width: 1024px) {
+  body::after {
+    background: none;
+  }
 }
 
 a {
