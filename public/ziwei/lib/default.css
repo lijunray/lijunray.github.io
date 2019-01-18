@@ -3,10 +3,23 @@ body {
   padding: 0;
   background: #ffe;
   font-size: 14px;
-  font-family: "微软雅黑", "宋体", sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #231f20;
   overflow: auto;
 }
+body::after {
+  content: "";
+  background: url(../../assets/images/background2.jpg);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-size: 100%;
+}
+
 a {
   color: #000;
   font-size: 14px;
@@ -28,6 +41,34 @@ a {
   top: 80px;
   position: absolute;
 }
+#preview {
+  text-align: center;
+  background: rgba(208, 33, 32, 0.85);
+  font-style: italic;
+  padding: 0px 35px;
+  height: 45px;
+  display: inline-block;
+  margin: 150px 0;
+  /* animation: fadein 240s; */
+  animation: fadein 2s;
+}
+
+#preview a {
+  color: #81d8d0;
+  font-size: 18px;
+  text-decoration: inherit;
+  line-height: 45px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #code {
   display: none;
   font-size: 16px;

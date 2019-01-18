@@ -1,12 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import CountDown from './CountDown/CountDown.react';
 
 import './app.css';
-import ReactImage from './react.png';
 
-const App = () => (
+const App = ({ backgroundImages }) => (
   <div>
-    <img name="image" src={ReactImage} alt="react" />
+    <CountDown backgroundImages={backgroundImages} />
   </div>
 );
+
+App.propTypes = {
+  backgroundImages: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 export default App;

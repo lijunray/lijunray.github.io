@@ -1,0 +1,101 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+img {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  margin: auto;
+  display: none;
+  z-index: -1;
+  width: 100%;
+}
+
+img.show {
+  display: block;
+  opacity: 0.9;
+  animation: fadein 2s;
+}
+
+img.hide {
+  display: block;
+  opacity: 0;
+  animation: fadeout 2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 0.9;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.count-down {
+  color: white;
+  font-size: 30px;
+  font-style: italic;
+  display: inline-block;
+  padding: 0 30px;
+  height: 60px;
+  line-height: 60px;
+  background: rgba(208, 33, 32);
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 1024px) {
+  .count-down {
+    color: #f0f2f5;
+    font-size: 18px;
+    font-style: italic;
+    display: inline-block;
+    padding: 0 30px;
+    height: 50px;
+    line-height: 50px;
+    background: rgba(208, 33, 32, 0.85);
+    margin-top: 100px;
+  }
+  img {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    margin: auto;
+    width: auto;
+    display: none;
+    z-index: -1;
+    height: 100%;
+  }
+}
+
+@media screen and (min-height: 650px) {
+  img {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    margin: auto;
+    width: auto;
+    display: none;
+    z-index: -1;
+    height: 100%;
+  }
+}

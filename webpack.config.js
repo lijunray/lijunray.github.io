@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const outputDirectory = 'dist';
+const outputDirectory = 'ziwei';
 
 module.exports = {
   entry: ['babel-polyfill', './src/client/index.js'],
@@ -24,8 +24,8 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=100000'
+        test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|jpeg)$/,
+        use: ['file-loader']
       }
     ]
   },

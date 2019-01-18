@@ -14,13 +14,15 @@
       rel="stylesheet"
       href="./public/ziwei/lib/default.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="main">
       <div id="wrap">
-        <div id="root">
-          <img width="350px" src="./public/assets/images/nyu.jpeg" />
-        </div>
+        <div id="root"></div>
         <div id="clock-box">
           <a href="https://www.instagram.com/lijunray/" target="_blank">@Jun</a>
           与
@@ -247,9 +249,9 @@
             canvas
               .parent()
               .css("background", "url(" + tree.toDataURL("image/png") + ")");
-            canvas.css("background", "#ffe");
+            // canvas.css("background", "#ffe");
             $await(Jscex.Async.sleep(300));
-            canvas.css("background", "none");
+            // canvas.css("background", "none");
           })
         );
 
@@ -265,16 +267,33 @@
           })
         );
 
+        var showPhoto = eval(
+          Jscex.compile("async", function() {
+            $("#root").html(
+              "<div id='preview'><a href='./ziwei/index.html'>Something more is going to happen here!</a></div>"
+            );
+          })
+        );
+
         var textAnimate = eval(
           Jscex.compile("async", function() {
             var together = new Date("Jan 18 2018 20:20:00 EST");
 
-            $("#code")
-              .show()
-              .typewriter();
             $("#clock-box").fadeIn(500);
             while (true) {
-              timeElapse(together);
+              var today = new Date();
+              var time = timeElapse(today, together);
+              var result =
+                '第 <span class="digit">' +
+                time.days +
+                '</span> 天 <span class="digit">' +
+                time.hours +
+                '</span> 小时 <span class="digit">' +
+                time.minutes +
+                '</span> 分钟 <span class="digit">' +
+                time.seconds +
+                "</span> 秒";
+              $("#clock").html(result);
               $await(Jscex.Async.sleep(1000));
             }
           })
@@ -286,6 +305,8 @@
             $await(growAnimate());
             $await(flowAnimate());
             $await(moveAnimate());
+            $await(showPhoto());
+            // $await(changeBackground());
 
             textAnimate().start();
 
