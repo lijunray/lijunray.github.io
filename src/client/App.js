@@ -17,7 +17,7 @@ App.propTypes = {
   backgroundImages: PropTypes.arrayOf(PropTypes.string).isRequired,
   photos: PropTypes.arrayOf(
     PropTypes.shape({
-      image: PropTypes.string,
+      images: PropTypes.arrayOf(PropTypes.string),
       text: PropTypes.string
     })
   ).isRequired

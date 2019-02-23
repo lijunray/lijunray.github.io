@@ -2,53 +2,58 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-let backgroundImages = [];
-let photos = [];
-
 const photoPaths = [
   {
-    image: import('../../public/assets/images/engagement/1.jpg'),
+    images: [import('../../public/assets/images/engagement/1.jpg')],
+    text: ''
+  },
+  {
+    images: [import('../../public/assets/images/engagement/2.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/2.jpg'),
+    images: [import('../../public/assets/images/engagement/3.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/3.jpg'),
+    images: [import('../../public/assets/images/engagement/4.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/4.jpg'),
+    images: [import('../../public/assets/images/engagement/5.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/5.jpg'),
+    images: [import('../../public/assets/images/engagement/6.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/6.jpg'),
+    images: [import('../../public/assets/images/engagement/7.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/7.jpg'),
+    images: [import('../../public/assets/images/engagement/8.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/8.jpg'),
+    images: [import('../../public/assets/images/engagement/9.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/9.jpg'),
+    images: [import('../../public/assets/images/engagement/10.jpg')],
     text: ''
   },
   {
-    image: import('../../public/assets/images/engagement/10.jpg'),
-    text: ''
+    images: [import('../../public/assets/images/engagement/11.jpg')],
+    text: '你一定没有留意到我特意藏了一张...'
   },
   {
-    image: import('../../public/assets/images/engagement/11.jpg'),
-    text: ''
+    images: [],
+    text: '你一定没有留意到我特意藏了一张...'
+  },
+  {
+    images: [import('../../public/assets/images/engagement/willyoumarryme_ziwei.jpg')],
+    text: '它是这张...'
   }
 ];
 
@@ -89,10 +94,13 @@ const importBackgroundImages = () => {
 
 const importAlbumImages = () => Promise.all(
   photoPaths.map(photo => ({
-    image: photo.image,
+    images: photo.images,
     text: photo.text
   }))
 );
+
+let backgroundImages = [];
+let photos = [];
 
 importBackgroundImages()
   .then((images) => {
@@ -101,7 +109,7 @@ importBackgroundImages()
   })
   .then((images) => {
     photos = images.map(image => ({
-      image: image.image.default,
+      image: image.images.map(i => i.default),
       text: image.text
     }));
   })
