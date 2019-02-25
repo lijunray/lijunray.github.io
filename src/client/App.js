@@ -6,18 +6,45 @@ import Album from './Album/Album.react';
 
 import './app.css';
 
-const App = ({ backgroundImages, photos }) => (
-  <div>
-    <CountDown backgroundImages={backgroundImages} />
-    <Album photos={photos} />
-  </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      countDownSeconds: 10
+    };
+  }
+
+  componentDidMount() {
+    const { countDownSeconds } = this.state;
+    setTimeout(() => {
+      this.setState({ countDownSeconds: countDownSeconds - 1 });
+    }, 1000);
+  }
+
+  render() {
+    const { backgroundImages, photos } = this.props;
+    console.log('app', photos);
+
+    return (
+      <div className="app">
+        {/* <CountDown backgroundImages={backgroundImages} /> */}
+        <Album photos={photos} />
+      </div>
+    );
+  }
+}
 
 App.propTypes = {
   backgroundImages: PropTypes.arrayOf(PropTypes.string).isRequired,
   photos: PropTypes.arrayOf(
     PropTypes.shape({
-      images: PropTypes.arrayOf(PropTypes.string),
+      images: PropTypes.arrayOf(
+        PropTypes.shape({
+          src: PropTypes.string,
+          animation: PropTypes.string
+        })
+      ),
       text: PropTypes.string
     })
   ).isRequired

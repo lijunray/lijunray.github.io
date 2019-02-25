@@ -2,7 +2,7 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-img {
+.count-down-img {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -15,13 +15,13 @@ img {
   width: 100%;
 }
 
-img.show {
+.show {
   display: block;
   opacity: 0.9;
   animation: fadein 2s;
 }
 
-img.hide {
+.hide {
   display: block;
   opacity: 0;
   animation: fadeout 2s;
@@ -69,7 +69,7 @@ img.hide {
     background: rgba(208, 33, 32, 0.85);
     margin-top: 100px;
   }
-  img {
+  .count-down-img {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -85,7 +85,7 @@ img.hide {
 }
 
 @media screen and (min-height: 800px) {
-  img {
+  .count-down-img {
     position: fixed;
     top: 0;
     bottom: 0;

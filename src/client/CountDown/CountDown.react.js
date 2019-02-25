@@ -27,10 +27,10 @@ class CountDown extends Component {
   getClassName(index) {
     const { fadeIn, fadeOut } = this.state;
     if (index === fadeIn) {
-      return 'show';
+      return 'count-down-img show';
     }
     if (index === fadeOut) {
-      return 'hide';
+      return 'count-down-img hide';
     }
     return '';
   }

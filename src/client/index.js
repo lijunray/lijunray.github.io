@@ -11,26 +11,13 @@ const importBackgroundImages = () => {
   return Promise.all(desktopBackgroundImages);
 };
 
-const importAlbumImages = () => Promise.all(
-  photoPaths.map(photo => ({
-    images: photo.images,
-    text: photo.text
-  }))
-);
-
 let backgroundImages = [];
 let photos = [];
 
 importBackgroundImages()
   .then((images) => {
     backgroundImages = images.map(image => image.default);
-    return importAlbumImages();
-  })
-  .then((images) => {
-    photos = images.map(image => ({
-      image: image.images.map(i => i.default),
-      text: image.text
-    }));
+    photos = photoPaths;
   })
   .then(() => {
     ReactDOM.render(
