@@ -32,7 +32,7 @@ class CountDown extends Component {
     if (index === fadeOut) {
       return 'count-down-img hide';
     }
-    return '';
+    return 'count-down-img';
   }
 
   fade() {
@@ -55,7 +55,7 @@ class CountDown extends Component {
     const { backgroundImages } = this.props;
     const { countDown } = this.state;
     return (
-      <div>
+      <div className="count-down-container">
         <div className="count-down">
           {countDown.days}
           {' Days '}

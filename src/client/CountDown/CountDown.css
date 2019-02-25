@@ -2,6 +2,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.count-down-container {
+  text-align: center;
+}
+
 .count-down-img {
   position: fixed;
   top: 0;
@@ -15,13 +19,13 @@ body {
   width: 100%;
 }
 
-.show {
+.count-down-img.show {
   display: block;
   opacity: 0.9;
   animation: fadein 2s;
 }
 
-.hide {
+.count-down-img.hide {
   display: block;
   opacity: 0;
   animation: fadeout 2s;
