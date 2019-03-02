@@ -31,6 +31,7 @@ class App extends React.Component {
   render() {
     const { backgroundImages, photos } = this.props;
     const { countDownSeconds } = this.state;
+    console.log(config.env);
 
     return (
       <div className="app">
