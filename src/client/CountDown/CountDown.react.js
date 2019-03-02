@@ -59,6 +59,8 @@ class CountDown extends Component {
         <div className="count-down">
           {countDown.days}
           {' Days '}
+          {countDown.hours}
+          {' Hours '}
           {countDown.minutes}
           {' Minutes '}
           {countDown.seconds}
