@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import CountDown from './CountDown/CountDown.react';
 import Album from './Album/Album.react';
 
+import config from '../../config.json';
+
 import './app.css';
 
 class App extends React.Component {
@@ -11,24 +13,31 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      countDownSeconds: 10
+      countDownSeconds: Math.ceil(Math.random() * 10) + 10
     };
   }
 
   componentDidMount() {
-    const { countDownSeconds } = this.state;
-    setTimeout(() => {
-      this.setState({ countDownSeconds: countDownSeconds - 1 });
-    }, 1000);
+    if (config.env === 'dev') {
+      setInterval(() => {
+        const { countDownSeconds } = this.state;
+        if (countDownSeconds >= 0) {
+          this.setState({ countDownSeconds: countDownSeconds - 1 });
+        }
+      }, 1000);
+    }
   }
 
   render() {
     const { backgroundImages, photos } = this.props;
+    const { countDownSeconds } = this.state;
 
     return (
       <div className="app">
-        {/* <CountDown backgroundImages={backgroundImages} /> */}
-        <Album photos={photos} />
+        {countDownSeconds >= 0 && (
+          <CountDown backgroundImages={backgroundImages} countDownSeconds={countDownSeconds} />
+        )}
+        {countDownSeconds < 0 && <Album photos={photos} />}
       </div>
     );
   }

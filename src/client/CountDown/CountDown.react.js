@@ -5,6 +5,7 @@ import { day } from './CountDown.constants';
 
 import './CountDown.css';
 import { substract } from './CountDown.utils';
+import config from '../../../config.json';
 
 class CountDown extends Component {
   constructor(props) {
@@ -19,8 +20,13 @@ class CountDown extends Component {
   }
 
   componentDidMount() {
-    setInterval(this.fade, 6000);
-    setInterval(this.calculateDate, 1000);
+    this.fadeInterval = setInterval(this.fade, 6000);
+    this.calculateInterval = setInterval(this.calculateDate, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.fadeInterval);
+    clearInterval(this.calculateInterval);
   }
 
   getClassName(index) {
@@ -50,21 +56,43 @@ class CountDown extends Component {
     this.setState({ countDown: substract(day, new Date()) });
   }
 
-  render() {
-    const { backgroundImages } = this.props;
+  renderProdCountdown() {
     const { countDown } = this.state;
     return (
+      <div className="count-down">
+        {countDown.days}
+        {' Days '}
+        {countDown.hours}
+        {' Hours '}
+        {countDown.minutes}
+        {' Minutes '}
+        {countDown.seconds}
+        {' Seconds'}
+      </div>
+    );
+  }
+
+  renderLocalCountdown() {
+    return (
+      <div className="count-down">
+        0 Days 0 Hours 0 Minutes
+        {` ${this.props.countDownSeconds} seconds`}
+      </div>
+    );
+  }
+
+  renderCountdown() {
+    if (config.env === 'dev') {
+      return this.renderLocalCountdown();
+    }
+    return this.renderProdCountdown();
+  }
+
+  render() {
+    const { backgroundImages } = this.props;
+    return (
       <div className="count-down-container">
-        <div className="count-down">
-          {countDown.days}
-          {' Days '}
-          {countDown.hours}
-          {' Hours '}
-          {countDown.minutes}
-          {' Minutes '}
-          {countDown.seconds}
-          {' Seconds'}
-        </div>
+        {this.renderCountdown()}
         {backgroundImages.map((backgroundImage, i) => (
           <img
             key={backgroundImage}
@@ -79,7 +107,8 @@ class CountDown extends Component {
 }
 
 CountDown.propTypes = {
-  backgroundImages: PropTypes.arrayOf(PropTypes.string).isRequired
+  backgroundImages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  countDownSeconds: PropTypes.number
 };
 
 export default CountDown;

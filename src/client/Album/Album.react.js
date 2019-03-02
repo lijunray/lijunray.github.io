@@ -17,9 +17,7 @@ class Album extends Component {
 
   changePageIndexHandler() {
     const { currentPageIndex } = this.state;
-    if (this.props.photos.length - 1 !== currentPageIndex) {
-      this.setState({ currentPageIndex: currentPageIndex + 1 });
-    }
+    this.setState({ currentPageIndex: currentPageIndex + 1 });
   }
 
   render() {

@@ -65,7 +65,8 @@ class Page extends React.Component {
 
     this.state = {
       showImages: false,
-      fadingOut: false
+      fadingOut: false,
+      willYouMarryMe: false
     };
 
     this.onTypingDoneHandler = this.onTypingDoneHandler.bind(this);
@@ -73,15 +74,19 @@ class Page extends React.Component {
 
   onTypingDoneHandler() {
     this.setState({ showImages: true });
-    const { onChangePageIndex, isLastOne } = this.props;
-    setTimeout(() => {
-      if (!isLastOne) {
-        this.setState({ fadingOut: true });
-      }
+    const { onChangePageIndex, isLastPage } = this.props;
+    if (!isLastPage) {
       setTimeout(() => {
-        onChangePageIndex();
-      }, 1000);
-    }, 3000);
+        this.setState({ fadingOut: true });
+        setTimeout(() => {
+          onChangePageIndex();
+        }, 1000);
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        this.setState({ willYouMarryMe: true });
+      }, 3000);
+    }
   }
 
   getPageRootStyle() {
@@ -90,6 +95,21 @@ class Page extends React.Component {
       return animationStyle[ANIMATION_FADE_OUT];
     }
     return undefined;
+  }
+
+  willYouMarryMe() {
+    const { isLastPage } = this.props;
+    const { willYouMarryMe } = this.state;
+    const style = {
+      ...animationStyle.fadeIn,
+      textAlign: 'center',
+      marginTop: 30,
+      fontSize: 45
+    };
+    if (isLastPage && willYouMarryMe) {
+      return <div style={style}>紫微，你愿意嫁给我吗？</div>;
+    }
+    return null;
   }
 
   renderImages() {
@@ -139,7 +159,7 @@ class Page extends React.Component {
   }
 
   render() {
-    const { images, texts } = this.props;
+    const { texts } = this.props;
 
     return (
       <StyleRoot style={{ height: '100%' }}>
@@ -148,6 +168,7 @@ class Page extends React.Component {
             {texts.map(text => renderText(text))}
           </Typist>
           {this.renderImages()}
+          {this.willYouMarryMe()}
         </div>
       </StyleRoot>
     );
@@ -155,7 +176,7 @@ class Page extends React.Component {
 }
 
 Page.defaultProps = {
-  isLastOne: false
+  isLastPage: false
 };
 
 Page.propTypes = {
@@ -167,7 +188,7 @@ Page.propTypes = {
   ).isRequired,
   texts: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChangePageIndex: PropTypes.func.isRequired,
-  isLastOne: PropTypes.bool
+  isLastPage: PropTypes.bool
 };
 
 export default Page;
