@@ -74,8 +74,12 @@ class Page extends React.Component {
 
   onTypingDoneHandler() {
     this.setState({ showImages: true });
-    const { onChangePageIndex, isLastPage } = this.props;
-    if (!isLastPage) {
+    const { onChangePageIndex, isLastPage, isFirstPage } = this.props;
+    if (isFirstPage) {
+      setTimeout(() => {
+        onChangePageIndex();
+      }, 1000);
+    } else if (!isLastPage) {
       setTimeout(() => {
         this.setState({ fadingOut: true });
         setTimeout(() => {
@@ -104,7 +108,12 @@ class Page extends React.Component {
       ...animationStyle.fadeIn,
       textAlign: 'center',
       marginTop: 30,
-      fontSize: 45
+      fontSize: 45,
+      position: 'absolute',
+      top: '30%',
+      left: 'calc(50% - 250px)',
+      backgroundColor: 'red',
+      padding: '10px 30px'
     };
     if (isLastPage && willYouMarryMe) {
       return <div style={style}>紫微，你愿意嫁给我吗？</div>;
@@ -188,7 +197,8 @@ Page.propTypes = {
   ).isRequired,
   texts: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChangePageIndex: PropTypes.func.isRequired,
-  isLastPage: PropTypes.bool
+  isLastPage: PropTypes.bool,
+  isFirstPage: PropTypes.bool
 };
 
 export default Page;

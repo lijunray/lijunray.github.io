@@ -32,6 +32,7 @@ class Album extends Component {
             texts={photo.texts}
             onChangePageIndex={this.changePageIndexHandler}
             isLastPage={index === photos.length - 1}
+            isFirstPage={index === 0}
           />
         ) : null))}
       </div>
