@@ -17,7 +17,9 @@ class Album extends Component {
 
   changePageIndexHandler() {
     const { currentPageIndex } = this.state;
-    this.setState({ currentPageIndex: currentPageIndex + 1 });
+    if (this.props.photos.length - 1 !== currentPageIndex) {
+      this.setState({ currentPageIndex: currentPageIndex + 1 });
+    }
   }
 
   render() {
@@ -31,6 +33,7 @@ class Album extends Component {
             images={photo.images}
             texts={photo.texts}
             onChangePageIndex={this.changePageIndexHandler}
+            isLastPage={index === photos.length - 1}
           />
         ) : null))}
       </div>

@@ -28,8 +28,8 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <CountDown backgroundImages={backgroundImages} />
-        {/* <Album photos={photos} /> */}
+        {/* <CountDown backgroundImages={backgroundImages} /> */}
+        <Album photos={photos} />
       </div>
     );
   }

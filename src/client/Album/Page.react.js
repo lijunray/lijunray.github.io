@@ -1,11 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typist from 'react-typist';
-import { fadeInUp, bounceInUp, fadeOut } from 'react-animations';
+import {
+  fadeInUp, bounceInUp, fadeOut, bounceInLeft, bounceInRight
+} from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
 
 import { containBackspace, removeBackspacePrefix } from './Album.utils';
-import { ANIMATION_FADE_IN, ANIMATION_BOUNCE_IN_UP, ANIMATION_FADE_OUT } from '../app.constants';
+import {
+  ANIMATION_FADE_IN,
+  ANIMATION_BOUNCE_IN_UP,
+  ANIMATION_FADE_OUT,
+  ANIMATION_BOUNCE_IN_LEFT,
+  ANIMATION_BOUNCE_IN_RIGHT
+} from '../app.constants';
 
 import 'react-typist/dist/standalone/Typist';
 import 'react-typist/dist/Typist.css';
@@ -40,6 +48,14 @@ const animationStyle = {
   [ANIMATION_BOUNCE_IN_UP]: {
     animation: 'x 1s',
     animationName: Radium.keyframes(bounceInUp, ANIMATION_BOUNCE_IN_UP)
+  },
+  [ANIMATION_BOUNCE_IN_LEFT]: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(bounceInLeft, ANIMATION_BOUNCE_IN_LEFT)
+  },
+  [ANIMATION_BOUNCE_IN_RIGHT]: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(bounceInRight, ANIMATION_BOUNCE_IN_RIGHT)
   }
 };
 
@@ -49,8 +65,7 @@ class Page extends React.Component {
 
     this.state = {
       showImages: false,
-      fadingOut: false,
-      finishedFadingOut: false
+      fadingOut: false
     };
 
     this.onTypingDoneHandler = this.onTypingDoneHandler.bind(this);
@@ -58,22 +73,21 @@ class Page extends React.Component {
 
   onTypingDoneHandler() {
     this.setState({ showImages: true });
-    const { onChangePageIndex } = this.props;
+    const { onChangePageIndex, isLastOne } = this.props;
     setTimeout(() => {
-      this.setState({ fadingOut: true });
+      if (!isLastOne) {
+        this.setState({ fadingOut: true });
+      }
       setTimeout(() => {
-        // onChangePageIndex();
+        onChangePageIndex();
       }, 1000);
     }, 3000);
   }
 
   getPageRootStyle() {
-    const { fadingOut, finishedFadingOut } = this.state;
+    const { fadingOut } = this.state;
     if (fadingOut) {
       return animationStyle[ANIMATION_FADE_OUT];
-    }
-    if (finishedFadingOut) {
-      return finishedFadingOutStyle;
     }
     return undefined;
   }
@@ -131,7 +145,7 @@ class Page extends React.Component {
     return (
       <StyleRoot style={{ height: '100%' }}>
         <div style={this.getPageRootStyle()} className="page">
-          <Typist onTypingDone={this.onTypingDoneHandler}>
+          <Typist avgTypingDelay={100} onTypingDone={this.onTypingDoneHandler}>
             {texts.map(text => renderText(text))}
           </Typist>
           {this.renderImages()}
@@ -141,6 +155,10 @@ class Page extends React.Component {
   }
 }
 
+Page.defaultProps = {
+  isLastOne: false
+};
+
 Page.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({
@@ -149,7 +167,8 @@ Page.propTypes = {
     })
   ).isRequired,
   texts: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onChangePageIndex: PropTypes.func.isRequired
+  onChangePageIndex: PropTypes.func.isRequired,
+  isLastOne: PropTypes.bool
 };
 
 export default Page;
