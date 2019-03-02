@@ -24,7 +24,6 @@ class App extends React.Component {
 
   render() {
     const { backgroundImages, photos } = this.props;
-    console.log('app', photos);
 
     return (
       <div className="app">

@@ -16,7 +16,6 @@ class CountDown extends Component {
     };
     this.fade = this.fade.bind(this);
     this.calculateDate = this.calculateDate.bind(this);
-    console.log(day);
   }
 
   componentDidMount() {

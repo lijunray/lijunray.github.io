@@ -140,7 +140,6 @@ class Page extends React.Component {
 
   render() {
     const { images, texts } = this.props;
-    console.log(images, texts);
 
     return (
       <StyleRoot style={{ height: '100%' }}>
