@@ -11,7 +11,7 @@ $ git clone https://github.com/lijunray/lijunray.github.io.git
 2. Install necessary packages:
 
 ```
-$ cd lijunray.github.io.git
+$ cd lijunray.github.io
 $ npm i
 ```
 
