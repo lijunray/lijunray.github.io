@@ -1,5 +1,3 @@
-# www.raylee.space
-
 # How To Run
 
 1. Download to your local.
